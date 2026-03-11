@@ -7,6 +7,7 @@ from typing import Any
 
 import requests
 
+from .configuration import validate_rest_base_path
 from .errors import (
     ApiBusinessError,
     BadRequestError,
@@ -88,7 +89,11 @@ class RestTransport:
     ) -> ApiResponse:
         method = str(operation["method"]).upper()
         path = str(operation["path"])
-        base_path = (self._configuration.base_path or "").rstrip("/")
+        base_path = validate_rest_base_path(
+            self._configuration.base_path,
+            allowed_domains=getattr(self._configuration, "allowed_domains", None),
+        )
+        base_path = (base_path or "").rstrip("/")
         if not base_path:
             raise ClientError("ConfigurationRestAPI.base_path is not set")
 

@@ -4,6 +4,8 @@
 ![Python Version](https://img.shields.io/badge/Python-%3E%3D3.9-brightgreen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+English is the source of truth for this README. Languages: English | [Chinese](./README.zh-CN.md)
+
 `weex-common` is a utility package for WEEX modular connectors, providing shared configuration, signing, transport, error handling, and WebSocket helpers for the Spot and Contract SDKs.
 
 ## Installation
@@ -22,6 +24,7 @@ Repository: [weex-labs/weex-connector-python](https://github.com/weex-labs/weex-
 
 - Shared utility classes for REST requests, response models, timestamps, and HMAC signatures.
 - Reusable configuration objects for REST APIs, WebSocket APIs, and WebSocket Streams.
+- Secure endpoint validation for REST and WebSocket URLs, limited to approved WEEX hostnames over `https` / `wss` by default.
 - Lightweight runtime layer reused by both `weex-spot-sdk` and `weex-contract-sdk`.
 
 ## Contributing

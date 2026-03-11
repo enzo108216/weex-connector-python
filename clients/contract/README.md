@@ -4,6 +4,8 @@
 ![Python Version](https://img.shields.io/badge/Python-%3E%3D3.9-brightgreen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+English is the source of truth for this README. Languages: English | [Chinese](./README.zh-CN.md)
+
 This is a client library for the WEEX Contract API, enabling developers to interact programmatically with WEEX contract trading through three distinct endpoints:
 
 - [REST API](./src/weex_contract_sdk/rest_api/rest_api.py)
@@ -92,6 +94,7 @@ More examples can be found in the [`examples`](./examples/) folder.
 The REST API supports the following configuration options:
 
 - `base_path`: REST base URL. Defaults to `https://api-contract.weex.com`.
+- `allowed_domains`: Allowed hostnames or domain suffixes for custom REST / WebSocket endpoints. Defaults to `("weex.com", "weex.tech")`.
 - `api_key`, `api_secret`, `passphrase`: HMAC authentication credentials.
 - `timeout`: Request timeout in seconds. Defaults to `30.0`.
 - `max_retries`: Retry count. Defaults to `0`.
@@ -102,6 +105,7 @@ The REST API supports the following configuration options:
 ##### Base URL
 
 Use `base_path` to override the default Contract REST endpoint when you need to target a different WEEX environment.
+Custom REST endpoints must use `https://` and resolve to a host allowed by `allowed_domains`.
 
 ##### Credentials
 
@@ -151,6 +155,8 @@ WEEX does not currently publish staging REST endpoints in the external docs. If 
 export WEEX_BASE_URL=https://<contract-staging-rest-endpoint>
 ```
 
+By default, custom endpoints must stay under `*.weex.com` or `*.weex.tech`. If WEEX provides another official hostname, construct `ConfigurationRestAPI(..., allowed_domains=(...))` explicitly before creating the client.
+
 #### Scope Notes
 
 - `POST /capi/v3/batchOrders` is intentionally excluded from this SDK.
@@ -178,6 +184,7 @@ More examples can be found in the [`examples`](./examples/) folder.
 The Websocket API supports the following configuration options:
 
 - `stream_url`: Private WebSocket endpoint.
+- `allowed_domains`: Allowed hostnames or domain suffixes for custom REST / WebSocket endpoints. Defaults to `("weex.com", "weex.tech")`.
 - `api_key`, `api_secret`, `passphrase`: Authenticated WebSocket credentials.
 - `timeout`: Socket timeout in seconds. Defaults to `30.0`.
 - `reconnect_delay`: Delay before reconnecting after a disconnect. Defaults to `1.5`.
@@ -207,6 +214,8 @@ WEEX does not currently publish staging private WebSocket endpoints in the exter
 export WEEX_WS_PRIVATE_URL=wss://<contract-staging-private-websocket-endpoint>
 ```
 
+Private WebSocket overrides must use `wss://` and stay under `allowed_domains` unless you explicitly extend that allowlist in code.
+
 ### Websocket Streams
 
 The Websocket Streams module provides public market data subscriptions for ticker, depth, trade, and kline-style channels. Use the [`websocket_streams`](./src/weex_contract_sdk/websocket_streams/websocket_streams.py) module to interact with these endpoints.
@@ -229,6 +238,7 @@ More examples can be found in the [`examples`](./examples/) folder.
 The Websocket Streams module supports the following configuration options:
 
 - `stream_url`: Public WebSocket endpoint.
+- `allowed_domains`: Allowed hostnames or domain suffixes for custom REST / WebSocket endpoints. Defaults to `("weex.com", "weex.tech")`.
 - `timeout`: Socket timeout in seconds. Defaults to `30.0`.
 - `reconnect_delay`: Delay before reconnecting after a disconnect. Defaults to `1.5`.
 - `user_agent`: Custom user agent string.
@@ -236,6 +246,7 @@ The Websocket Streams module supports the following configuration options:
 ##### Stream URL
 
 Use `stream_url` to override the default public market-data WebSocket endpoint.
+Custom stream URLs must use `wss://` and resolve to a host allowed by `allowed_domains`.
 
 ##### Timeout
 
@@ -256,6 +267,8 @@ WEEX does not currently publish staging public WebSocket endpoints in the extern
 ```bash
 export WEEX_WS_PUBLIC_URL=wss://<contract-staging-public-websocket-endpoint>
 ```
+
+Public WebSocket overrides follow the same secure default allowlist as private endpoints.
 
 ### Automatic Connection Renewal
 

@@ -4,6 +4,7 @@ import json
 import time
 from typing import Any, Callable
 
+from .configuration import validate_stream_url
 from .errors import ClientError
 from .signature import compact_json
 
@@ -21,11 +22,13 @@ class BaseWebSocketClient:
         timeout: float = 30.0,
         reconnect_delay: float = 1.5,
         headers_factory: Callable[[], dict[str, str]] | None = None,
+        allowed_domains: tuple[str, ...] | None = None,
     ) -> None:
         self._stream_url = stream_url
         self._timeout = timeout
         self._reconnect_delay = reconnect_delay
         self._headers_factory = headers_factory
+        self._allowed_domains = allowed_domains
         self._ws = None
         self._subscriptions: set[str] = set()
 
@@ -35,13 +38,18 @@ class BaseWebSocketClient:
         return [f"{key}: {value}" for key, value in self._headers_factory().items() if value]
 
     def connect(self) -> None:
+        stream_url = validate_stream_url(
+            self._stream_url,
+            field_name="BaseWebSocketClient.stream_url",
+            allowed_domains=self._allowed_domains,
+        )
+        if not stream_url:
+            raise ClientError("WebSocket stream URL is not configured")
         if websocket is None:
             raise ClientError("websocket-client is not installed")
-        if not self._stream_url:
-            raise ClientError("WebSocket stream URL is not configured")
         if self._ws is None:
             self._ws = websocket.create_connection(
-                self._stream_url,
+                stream_url,
                 timeout=self._timeout,
                 header=self._headers(),
             )

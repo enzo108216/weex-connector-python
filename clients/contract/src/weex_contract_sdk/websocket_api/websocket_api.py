@@ -14,6 +14,7 @@ class ContractWebSocketAPI:
             timeout=configuration.timeout,
             reconnect_delay=configuration.reconnect_delay,
             headers_factory=self._headers,
+            allowed_domains=configuration.allowed_domains,
         )
 
     def _headers(self) -> dict[str, str]:
