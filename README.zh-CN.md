@@ -1,7 +1,7 @@
 # WEEX Python Connectors
 
 [![Open Issues](https://img.shields.io/github/issues/weex-labs/weex-connector-python)](https://github.com/weex-labs/weex-connector-python/issues)
-![Python Version](https://img.shields.io/badge/Python-%3E%3D3.9-brightgreen)
+![Python Version](https://img.shields.io/badge/Python-%3E%3D3.10-brightgreen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 英文原版为准。语言：[English](./README.md) | 简体中文
@@ -12,7 +12,7 @@
 
 在使用 SDK 之前，请确保你具备：
 
-- Python 3.9 或更高版本
+- Python 3.10 或更高版本
 - `pip`
 - 可选：`venv` 或其它虚拟环境工具
 

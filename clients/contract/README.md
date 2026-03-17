@@ -1,7 +1,7 @@
 # WEEX Python Contract SDK
 
 [![Open Issues](https://img.shields.io/github/issues/weex-labs/weex-connector-python)](https://github.com/weex-labs/weex-connector-python/issues)
-![Python Version](https://img.shields.io/badge/Python-%3E%3D3.9-brightgreen)
+![Python Version](https://img.shields.io/badge/Python-%3E%3D3.10-brightgreen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 English is the source of truth for this README. Languages: English | [Chinese](./README.zh-CN.md)
@@ -37,7 +37,7 @@ This is a client library for the WEEX Contract API, enabling developers to inter
 
 ## Installation
 
-To use this library, ensure your environment is running Python version **3.9** or later.
+To use this library, ensure your environment is running Python version **3.10** or later.
 
 These packages are currently installed from source. From the repository root, install the shared runtime first, then install the Contract connector:
 

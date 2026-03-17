@@ -7,7 +7,7 @@ name = "weex-common"
 version = "0.1.0"
 description = "WEEX common models and utilities for Python connectors"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
   "requests>=2.31.0,<3.0.0",
   "websocket-client>=1.8.0,<2.0.0",

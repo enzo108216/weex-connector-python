@@ -1,7 +1,7 @@
 # WEEX Python Contract SDK
 
 [![Open Issues](https://img.shields.io/github/issues/weex-labs/weex-connector-python)](https://github.com/weex-labs/weex-connector-python/issues)
-![Python Version](https://img.shields.io/badge/Python-%3E%3D3.9-brightgreen)
+![Python Version](https://img.shields.io/badge/Python-%3E%3D3.10-brightgreen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 英文原版为准。语言：[English](./README.md) | 简体中文
@@ -41,7 +41,7 @@
 
 ## 安装
 
-使用该库时，请确保运行环境为 Python **3.9** 或更高版本。
+使用该库时，请确保运行环境为 Python **3.10** 或更高版本。
 
 这些包目前通过源码方式安装。请先在仓库根目录安装共享运行时，再安装 Contract 连接器：
 
