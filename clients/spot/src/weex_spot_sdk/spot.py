@@ -14,8 +14,8 @@ from .websocket_api import SpotWebSocketAPI
 from .websocket_streams import SpotWebSocketStreams
 
 REST_API_PROD_URL = "https://api-spot.weex.com"
-WS_API_PROD_URL = "wss://ws-spot.weex.com/v2/ws/private"
-WS_STREAMS_PROD_URL = "wss://ws-spot.weex.com/v2/ws/public"
+WS_API_PROD_URL = "wss://ws-spot.weex.com/v3/ws/private"
+WS_STREAMS_PROD_URL = "wss://ws-spot.weex.com/v3/ws/public"
 
 
 def _ua() -> str:

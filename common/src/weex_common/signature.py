@@ -78,6 +78,6 @@ def sign_websocket_private(
     *,
     secret: str,
     timestamp: str,
-    request_path: str = "/v2/ws/private",
+    request_path: str = "/v3/ws/private",
 ) -> str:
     return sign_message(secret, f"{timestamp}{request_path}")

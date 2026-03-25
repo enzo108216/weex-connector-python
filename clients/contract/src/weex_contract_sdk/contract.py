@@ -14,8 +14,8 @@ from .websocket_api import ContractWebSocketAPI
 from .websocket_streams import ContractWebSocketStreams
 
 REST_API_PROD_URL = "https://api-contract.weex.com"
-WS_API_PROD_URL = "wss://ws-contract.weex.com/v2/ws/private"
-WS_STREAMS_PROD_URL = "wss://ws-contract.weex.com/v2/ws/public"
+WS_API_PROD_URL = "wss://ws-contract.weex.com/v3/ws/private"
+WS_STREAMS_PROD_URL = "wss://ws-contract.weex.com/v3/ws/public"
 
 
 def _ua() -> str:

@@ -219,7 +219,7 @@ Private WebSocket overrides must use `wss://` and stay under `allowed_domains` u
 
 ### Websocket Streams
 
-The Websocket Streams module provides public market data subscriptions for ticker, depth, trade, and kline-style channels. Use the [`websocket_streams`](./src/weex_spot_sdk/websocket_streams/websocket_streams.py) module to interact with these endpoints.
+The Websocket Streams module provides public market data subscriptions for book ticker, ticker, depth, trade, and kline-style channels. Use the [`websocket_streams`](./src/weex_spot_sdk/websocket_streams/websocket_streams.py) module to interact with these endpoints.
 
 ```python
 from weex_spot_sdk import Spot
@@ -227,7 +227,7 @@ from weex_spot_sdk import Spot
 client = Spot.from_env()
 streams = client.websocket_streams
 streams.connect()
-streams.subscribe_ticker("BTCUSDT")
+streams.subscribe_book_ticker("BTCUSDT")
 print(streams.receive())
 streams.close()
 ```

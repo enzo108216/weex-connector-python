@@ -31,6 +31,11 @@ class BaseWebSocketClient:
         self._allowed_domains = allowed_domains
         self._ws = None
         self._subscriptions: set[str] = set()
+        self._request_id = 0
+
+    def _next_request_id(self) -> int:
+        self._request_id += 1
+        return self._request_id
 
     def _headers(self) -> list[str]:
         if not self._headers_factory:
@@ -59,7 +64,13 @@ class BaseWebSocketClient:
         time.sleep(self._reconnect_delay)
         self.connect()
         for channel in sorted(self._subscriptions):
-            self.send_json({"event": "subscribe", "channel": channel})
+            self.send_json(
+                {
+                    "method": "SUBSCRIBE",
+                    "params": [channel],
+                    "id": self._next_request_id(),
+                }
+            )
 
     def send_json(self, payload: dict[str, Any]) -> None:
         if self._ws is None:
@@ -85,15 +96,27 @@ class BaseWebSocketClient:
         except json.JSONDecodeError:
             return raw
         if isinstance(payload, dict) and payload.get("event") == "ping" and payload.get("time") is not None:
-            self.send_json({"event": "pong", "time": payload["time"]})
+            self.send_json({"method": "PONG", "id": 1})
         return payload
 
     def subscribe_channel(self, channel: str) -> None:
-        self.send_json({"event": "subscribe", "channel": channel})
+        self.send_json(
+            {
+                "method": "SUBSCRIBE",
+                "params": [channel],
+                "id": self._next_request_id(),
+            }
+        )
         self._subscriptions.add(channel)
 
     def unsubscribe_channel(self, channel: str) -> None:
-        self.send_json({"event": "unsubscribe", "channel": channel})
+        self.send_json(
+            {
+                "method": "UNSUBSCRIBE",
+                "params": [channel],
+                "id": self._next_request_id(),
+            }
+        )
         self._subscriptions.discard(channel)
 
     def close(self) -> None:

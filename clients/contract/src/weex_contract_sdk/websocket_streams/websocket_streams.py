@@ -35,13 +35,13 @@ class ContractWebSocketStreams:
         self._client.close()
 
     def subscribe_ticker(self, contract_id: str) -> None:
-        self.subscribe(f"ticker.{contract_id}")
+        self.subscribe(f"{contract_id}@ticker")
 
     def subscribe_trades(self, contract_id: str) -> None:
-        self.subscribe(f"trades.{contract_id}")
+        self.subscribe(f"{contract_id}@trade")
 
     def subscribe_depth(self, contract_id: str, level: int = 15) -> None:
-        self.subscribe(f"depth.{contract_id}.{level}")
+        self.subscribe(f"{contract_id}@depth{level}")
 
     def subscribe_kline(
         self,
@@ -49,4 +49,4 @@ class ContractWebSocketStreams:
         interval: str,
         price_type: str = "LAST_PRICE",
     ) -> None:
-        self.subscribe(f"kline.{price_type}.{contract_id}.{interval}")
+        self.subscribe(f"{contract_id}@kline_{interval}_{price_type}")

@@ -35,13 +35,16 @@ class SpotWebSocketStreams:
         self._client.close()
 
     def subscribe_ticker(self, symbol: str) -> None:
-        self.subscribe(f"ticker.{symbol}")
+        self.subscribe(f"{symbol}@ticker")
+
+    def subscribe_book_ticker(self, symbol: str) -> None:
+        self.subscribe(f"{symbol}@bookTicker")
 
     def subscribe_trades(self, symbol: str) -> None:
-        self.subscribe(f"trades.{symbol}")
+        self.subscribe(f"{symbol}@trade")
 
     def subscribe_depth(self, symbol: str, level: int = 15) -> None:
-        self.subscribe(f"depth.{symbol}.{level}")
+        self.subscribe(f"{symbol}@depth{level}")
 
     def subscribe_kline(
         self,
@@ -49,4 +52,4 @@ class SpotWebSocketStreams:
         interval: str,
         price_type: str = "LAST_PRICE",
     ) -> None:
-        self.subscribe(f"kline.{price_type}.{symbol}.{interval}")
+        self.subscribe(f"{symbol}@kline_{interval}_{price_type}")

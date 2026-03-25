@@ -175,6 +175,7 @@ export WEEX_BASE_URL=https://<spot-staging-rest-endpoint>
 
 ### WebSocket API
 
+
 WebSocket API 为账户与订单事件提供需要鉴权的请求-响应通信。使用 [`websocket_api`](./src/weex_spot_sdk/websocket_api/websocket_api.py) 模块与这些端点交互。
 
 ```python
@@ -231,6 +232,7 @@ export WEEX_WS_PRIVATE_URL=wss://<spot-staging-private-websocket-endpoint>
 
 ### WebSocket Streams
 
+
 WebSocket Streams 模块为 ticker、depth、trade 和类 kline 频道提供公开市场数据订阅。使用 [`websocket_streams`](./src/weex_spot_sdk/websocket_streams/websocket_streams.py) 模块与这些端点交互。
 
 ```python
@@ -239,7 +241,7 @@ from weex_spot_sdk import Spot
 client = Spot.from_env()
 streams = client.websocket_streams
 streams.connect()
-streams.subscribe_ticker("BTCUSDT")
+streams.subscribe_book_ticker("BTCUSDT")
 print(streams.receive())
 streams.close()
 ```
